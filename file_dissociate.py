@@ -12,6 +12,7 @@ else:
 
 DEBUG = False
 N = 2
+BENCHMARK = True
 
 d = dp.dictionary(debug=DEBUG)
 f = open(infile,"r")
@@ -24,6 +25,8 @@ for i, l in enumerate(input):
     d.dissociate(l, N=N)
     if i%100 == 0:
         print i
+
+if BENCHMARK: exit(0)
 
 try:
     while 1:
