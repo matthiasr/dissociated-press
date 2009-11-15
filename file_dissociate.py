@@ -44,10 +44,7 @@ try:
 
         if sentence not in input:
             print sentence
-        else:
-            print "FAIL:", sentence
-
-        sleep(1)
+            sleep(1)
 
 except KeyboardInterrupt:
     print "=== Enough! ==="
