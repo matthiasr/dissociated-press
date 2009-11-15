@@ -7,6 +7,7 @@ from time import sleep
 d = dp.dictionary()
 f = open("TESTDATA","r")
 input = f.readlines()
+f.close()
 
 for l in input:
     print l
@@ -25,5 +26,3 @@ try:
 
 except KeyboardInterrupt:
     print "=== Enough! ==="
-
-f.close()
