@@ -6,18 +6,24 @@ from time import sleep
 from sys import argv
 
 if len(argv) == 1:
-    infile = "TESTDATA"
+    infile = "PLOMDATA"
 else:
     infile = argv[1]
 
-d = dp.dictionary()
+DEBUG = False
+N = 2
+
+d = dp.dictionary(debug=DEBUG)
 f = open(infile,"r")
 input = f.readlines()
 f.close()
 
-for l in input:
-    print l
-    d.dissociate(l)
+for i, l in enumerate(input):
+    if DEBUG:
+        print l
+    d.dissociate(l, N=N)
+    if i%100 == 0:
+        print i
 
 try:
     while 1:
