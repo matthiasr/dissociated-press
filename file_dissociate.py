@@ -25,7 +25,7 @@ def dissociate(d,input):
         if DEBUG:
             print l
         d.dissociate(l, N=N)
-        if i%100 == 0:
+        if not BENCHMARK and i%100 == 0:
             print i
     return d
 
@@ -35,7 +35,7 @@ else:
     dissociate(d,input)
 
 if BENCHMARK:
-    profile.run('for i in xrange(10):print d.associate()')
+    profile.run('for i in xrange(1000): d.associate()')
     exit(0)
 
 try:
