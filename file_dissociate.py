@@ -35,7 +35,7 @@ else:
     dissociate(d,input)
 
 if BENCHMARK:
-    profile.run('[d.associate() for i in xrange(10)]')
+    profile.run('for i in xrange(10):print d.associate()')
     exit(0)
 
 try:
