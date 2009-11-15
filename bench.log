@@ -1,0 +1,38 @@
+         681867 function calls in 14.158 CPU seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   14.158   14.158 <string>:1(<module>)
+    63791    0.050    0.000    0.074    0.000 dissociated_press.py:35(addNextFragment)
+    63791    0.056    0.000    0.086    0.000 dissociated_press.py:39(addPrevFragment)
+    74700    0.399    0.000    0.399    0.000 dissociated_press.py:59(addPosition)
+    57369    0.463    0.000    0.463    0.000 dissociated_press.py:9(__init__)
+    10909   12.919    0.001   14.103    0.001 dissociated_press.py:91(dissociate)
+        1    0.055    0.055   14.158   14.158 file_dissociate.py:23(dissociate)
+    10909    0.005    0.000    0.005    0.000 {iter}
+    85609    0.024    0.000    0.024    0.000 {len}
+   207359    0.077    0.000    0.077    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+    74700    0.038    0.000    0.038    0.000 {method 'join' of 'str' objects}
+    10909    0.005    0.000    0.005    0.000 {method 'rstrip' of 'str' objects}
+    10909    0.054    0.000    0.054    0.000 {method 'split' of 'str' objects}
+    10909    0.013    0.000    0.013    0.000 {range}
+
+
+         532110 function calls in 0.903 CPU seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.003    0.003    0.903    0.903 <string>:1(<module>)
+     1000    0.475    0.000    0.900    0.001 dissociated_press.py:145(associate)
+   131527    0.111    0.000    0.418    0.000 dissociated_press.py:51(getNextRandomFragment)
+     1000    0.001    0.000    0.001    0.000 dissociated_press.py:84(getWordsAtPosition)
+   132527    0.256    0.000    0.310    0.000 random.py:259(choice)
+   132527    0.022    0.000    0.022    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+   132527    0.031    0.000    0.031    0.000 {method 'random' of '_random.Random' objects}
+     1000    0.003    0.000    0.003    0.000 {range}
+
+
