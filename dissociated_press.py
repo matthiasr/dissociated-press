@@ -142,8 +142,11 @@ class dictionary:
             except KeyError:
                 self.wordsAtPosition[i] = [w.value]
 
-    def associate(self, separator=" "):
-        """Associate a sentence from the dictionary."""
+    def associate(self, separator=" ", ttl=255):
+        """
+        Associate a sentence from the dictionary using separators.
+        The ttl parameter is a limit for the number of iterations.
+        """
 
         # we need a first word
         self.sentence = ""
@@ -151,13 +154,16 @@ class dictionary:
         w = choice(self.getWordsAtPosition(0))
         self.sentence += w
 
-        while w:
-            # print self.sentence, w
-            try:
-                w = self.words[w].getNextRandomFragment()
-                if w: self.sentence += separator + w
-            except IndexError: # occurs when looking up an empty word
-                pass
+        for i in range(ttl):
+            if w:
+                # print self.sentence, w
+                try:
+                    w = self.words[w].getNextRandomFragment()
+                    if w: self.sentence += separator + w
+                except IndexError: # occurs when looking up an empty word
+                    pass
+            else:
+                break
 
         return self.sentence
 
