@@ -3,9 +3,15 @@
 
 import dissociated_press as dp
 from time import sleep
+from sys import argv
+
+if len(argv) == 1:
+    infile = "TESTDATA"
+else:
+    infile = argv[1]
 
 d = dp.dictionary()
-f = open("TESTDATA","r")
+f = open(infile,"r")
 input = f.readlines()
 f.close()
 
