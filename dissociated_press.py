@@ -72,6 +72,7 @@ class dictionary:
         Sentences (strings) can be associated into or out of it.
         """
         self.words = {}
+        self.wordsAtPosition = {}
 
     def __repr__(self):
         return str(self.words)
@@ -81,14 +82,10 @@ class dictionary:
 
     def getWordsAtPosition(self, position):
         """Get all words that may occur at one position."""
-
-        wordsAtPosition = []
-
-        for w in self.words:
-            if position in self.words[w].getPositions().keys():
-                wordsAtPosition.append(w)
-
-        return wordsAtPosition
+        try:
+            return self.wordsAtPosition[position]
+        except KeyError:
+            return []
 
     def dissociate(self, string, separator=" ", N=1):
         """
@@ -133,6 +130,11 @@ class dictionary:
                 print "@ ENDE"
 
             w.addPosition(i)
+            try:
+                if w.value not in self.wordsAtPosition[i]:
+                    self.wordsAtPosition[i].append(w.value)
+            except KeyError:
+                self.wordsAtPosition[i] = [w.value]
 
     def associate(self, separator=" "):
         """Associate a sentence from the dictionary."""
