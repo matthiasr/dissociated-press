@@ -4,6 +4,7 @@
 import dissociated_press as dp
 from time import sleep
 from sys import argv
+import cProfile as profile
 
 if len(argv) == 1:
     infile = "PLOMDATA"
@@ -12,19 +13,30 @@ else:
 
 DEBUG = False
 N = 2
-BENCHMARK = True
+BENCHMARK = False
 
 d = dp.dictionary(debug=DEBUG)
 f = open(infile,"r")
 input = f.readlines()
 f.close()
 
-for i, l in enumerate(input):
-    if DEBUG:
-        print l
-    d.dissociate(l, N=N)
-    if i%100 == 0:
-        print i
+def dissociate(d,input):
+    for i, l in enumerate(input):
+        if DEBUG:
+            print l
+        d.dissociate(l, N=N)
+        if i%100 == 0:
+            print i
+    return d
+
+if BENCHMARK:
+    profile.run('dissociate(d,input)')
+else:
+    dissociate(d,input)
+
+if BENCHMARK:
+    profile.run('for i in xrange(10):print d.associate()')
+    exit(0)
 
 if BENCHMARK: exit(0)
 
