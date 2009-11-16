@@ -38,8 +38,6 @@ if BENCHMARK:
     profile.run('for i in xrange(1000): d.associate()')
     exit(0)
 
-if BENCHMARK: exit(0)
-
 try:
     while 1:
         sentence = d.associate()
