@@ -13,30 +13,19 @@ else:
 
 DEBUG = False
 N = 2
-BENCHMARK = False
 
 d = dp.dictionary(debug=DEBUG)
 f = open(infile,"r")
 input = f.readlines()
 f.close()
 
-def dissociate(d,input):
-    for i, l in enumerate(input):
-        if DEBUG:
-            print l
-        d.dissociate(l, N=N)
-        if not BENCHMARK and i%100 == 0:
-            print i
-    return d
 
-if BENCHMARK:
-    profile.run('dissociate(d,input)')
-else:
-    dissociate(d,input)
-
-if BENCHMARK:
-    profile.run('for i in xrange(1000): d.associate()')
-    exit(0)
+for i, l in enumerate(input):
+    if DEBUG:
+        print l
+    d.dissociate(l, N=N)
+    if i%100 == 0:
+        print i
 
 try:
     while 1:
