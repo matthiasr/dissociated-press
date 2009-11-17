@@ -4,7 +4,6 @@
 import dissociated_press as dp
 from time import sleep
 from sys import argv
-import cProfile as profile
 
 if len(argv) == 1:
     infile = "PLOMDATA"
@@ -19,7 +18,6 @@ f = open(infile,"r")
 input = f.readlines()
 f.close()
 
-
 for i, l in enumerate(input):
     if DEBUG:
         print l
@@ -30,6 +28,10 @@ for i, l in enumerate(input):
 try:
     while 1:
         sentence = d.associate()
+
+        # fix line endings (why exactly does this occur ?)
+        if not sentence.endswith("\n"):
+            sentence = sentence + "\n"
 
         if sentence not in input:
             print sentence
