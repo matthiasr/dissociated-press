@@ -1,6 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+#       This program is free software; you can redistribute it and/or modify
+#       it under the terms of the GNU General Public License as published by
+#       the Free Software Foundation; either version 3 of the License, or
+#       (at your option) any later version.
+#       
+#       This program is distributed in the hope that it will be useful,
+#       but WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#       GNU General Public License for more details.
+#       
+#       You should have received a copy of the GNU General Public License
+#       along with this program; if not, write to the Free Software
+#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#       MA 02110-1301, USA.
+
 from random import choice
 from sys import stdin
 from time import sleep
@@ -91,7 +106,8 @@ class dictionary:
     def dissociate(self, string, separator=" ", N=1):
         """
         Dissociate a sentence into this dictionary.
-        N tells how many words are fused back together.
+
+        N tells how many words are fused back together into a Fragment.
         """
 
         sentence = string.split(separator)
@@ -142,26 +158,47 @@ class dictionary:
             except KeyError:
                 self.wordsAtPosition[i] = [w.value]
 
-    def associate(self, separator=" ", ttl=255):
+    def associate(self, next=True, prev=False, separator=" ", startWord="", ttl=255):
         """
         Associate a sentence from the dictionary using separators.
+
+        The next and prev parameter control if next and previous fragments
+        are considered during the process of association.
+        WARNING: 
+
+        The startWord parameter provides an optional entry point.
         The ttl parameter is a limit for the number of iterations.
         """
 
         # we need a first word
-        self.sentence = ""
+        if startWord:
+            w = startWord
+        else:
+            w = choice(self.getWordsAtPosition(0))
 
-        w = choice(self.getWordsAtPosition(0))
-        self.sentence += w
+        self.sentence = w
+        self.entryPoint = w
 
         for i in range(ttl):
             if w:
-                # print self.sentence, w
-                try:
-                    w = self.words[w].getNextRandomFragment()
-                    if w: self.sentence += separator + w
-                except IndexError: # occurs when looking up an empty word
-                    pass
+                if prev:
+                    try:
+                        w = self.words[w].getPrevRandomFragment()
+                        if w: self.sentence = w + separator + self.sentence
+                    except IndexError: # occurs when looking up an empty word
+                        pass
+
+        w = self.entryPoint
+
+        for i in range(ttl):
+            if w:
+                if next:
+                    try:
+                        w = self.words[w].getNextRandomFragment()
+                        if w: self.sentence = self.sentence + separator + w
+                    except IndexError: # occurs when looking up an empty word
+                        pass
+
             else:
                 break
 
